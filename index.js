@@ -114,3 +114,102 @@ function gameObject() {
         },
     };
 }
+
+function numPointsScored(playerName) {
+    const game = gameObject();
+
+    if (game.home.players[playerName]) {
+        return game.home.players[playerName].points;
+    }
+
+    if (game.away.players[playerName]) {
+        return game.away.players[playerName].points;
+    }
+}
+
+function shoeSize(playerName) {
+    const game = gameObject();
+
+    if (game.home.players[playerName]) {
+        return game.home.players[playerName].shoe;
+    }
+
+    if (game.away.players[playerName]) {
+        return game.away.players[playerName].shoe;
+    }
+}
+
+function teamColors(teamName) {
+    const game = gameObject();
+
+    if (game.home.teamName === teamName) {
+        return game.home.colors;
+    }
+
+    if (game.away.teamName === teamName) {
+        return game.away.colors;
+    }
+}
+
+function teamNames() {
+    const game = gameObject();
+
+    return [game.home.teamName, game.away.teamName];
+}
+
+function playerNumbers(teamName) {
+    const game = gameObject();
+    let team;
+
+    if (game.home.teamName === teamName) {
+        team = game.home;
+    } else if (game.away.teamName === teamName) {
+        team = game.away;
+    }
+
+    const numbers = [];
+
+    for (const playerName in team.players) {
+        numbers.push(team.players[playerName].number);
+    }
+
+    return numbers;
+}
+
+function playerStats(playerName) {
+    const game = gameObject();
+
+    if (game.home.players[playerName]) {
+        return game.home.players[playerName];
+    }
+
+    if (game.away.players[playerName]) {
+        return game.away.players[playerName];
+    }
+}
+
+function bigShoeRebounds() {
+    const game = gameObject();
+    let biggestShoe = 0;
+    let rebounds = 0;
+
+    for (const playerName in game.home.players) {
+        const player = game.home.players[playerName];
+
+        if (player.shoe > biggestShoe) {
+            biggestShoe = player.shoe;
+            rebounds = player.rebounds;
+        }
+    }
+
+    for (const playerName in game.away.players) {
+        const player = game.away.players[playerName];
+
+        if (player.shoe > biggestShoe) {
+            biggestShoe = player.shoe;
+            rebounds = player.rebounds;
+        }
+    }
+
+    return rebounds;
+}
